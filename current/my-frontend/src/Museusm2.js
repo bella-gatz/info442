@@ -248,7 +248,7 @@ function Museums() {
                     aria-label="add to favorites"
                     onClick={() => handleFavoriteToggle(museum)}
                 >
-                    {favorites.includes(museum.id) ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
+                    {favorites.includes(museum.name) ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
                 </IconButton>
                 </CardActions>
             </Card>
