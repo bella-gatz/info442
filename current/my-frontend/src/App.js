@@ -6,13 +6,13 @@ import Typography from '@mui/material/Typography';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { FavoritesProvider } from './FavoritesContext';
-// import SeattleMuseumsGuide from './SeattleMuseumsGuide';
 import Home from './Home';
 import Profile from './Profile';
 import Exhibitions from './Exhibitions';
 import Museums from './Museusm2';
 import Favorites from './Favorites';
 import Layout from './Layout';
+import SignIn from './SignIn';
 
 function Copyright() {
   return (
@@ -66,14 +66,12 @@ export default function App() {
               <Route path="favorites" element={<Favorites />} />
               <Route path="exhibitions" element={<Exhibitions />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="signin" element={<SignIn />} />
             </Route>
           </Routes>
         </Router>
       </FavoritesProvider>
 
-      {/* <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          <SeattleMuseumsGuide/>
-        </Typography> */}
     </ThemeProvider>
   );
 }

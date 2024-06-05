@@ -54,10 +54,6 @@ function MuseumComparisonTool({ museums }) {
         }
     };
 
-    // const handleCompareClick = () => {
-    //     // Perform comparison actions here
-    //     console.log("Comparison clicked");
-    // };
 
     const removeTicket = (index) => {
         const updatedTickets = tickets.filter((_, i) => i !== index);
@@ -90,10 +86,6 @@ function MuseumComparisonTool({ museums }) {
             <Button variant="contained" color="primary" onClick={handleAddTicket} sx={{ mb: 2 }}>
                 Add Ticket
             </Button>
-{/* 
-            <Button variant="contained" color="secondary" onClick={handleCompareClick} sx={{ mb: 2, ml: 2 }}>
-                Compare
-            </Button> */}
 
             <Button variant="outlined" color="error" onClick={resetComparison} sx={{ mb: 2, ml: 2 }}>
                 Reset
