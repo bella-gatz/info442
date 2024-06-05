@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/bella-gatz/info442/static/css/main.d9d6e574.css",
+    "main.js": "/bella-gatz/info442/static/js/main.7dac88d5.js",
+    "static/js/453.911a5674.chunk.js": "/bella-gatz/info442/static/js/453.911a5674.chunk.js",
+    "index.html": "/bella-gatz/info442/index.html",
+    "main.d9d6e574.css.map": "/bella-gatz/info442/static/css/main.d9d6e574.css.map",
+    "main.7dac88d5.js.map": "/bella-gatz/info442/static/js/main.7dac88d5.js.map",
+    "453.911a5674.chunk.js.map": "/bella-gatz/info442/static/js/453.911a5674.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d9d6e574.css",
+    "static/js/main.7dac88d5.js"
+  ]
+}
