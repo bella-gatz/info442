@@ -48,18 +48,20 @@ function Museums() {
       const data = await response.json();
       let filteredData = data.filter(item => item.name && item.name.toLowerCase().includes('museum'));
       filteredData = filteredData.filter(item => item.phone != null);
-
-      // Transform longitude and latitude keys to an array
+  
+      // Ensure latitude and longitude are numbers and present
       filteredData = filteredData.map(item => ({
         ...item,
-        coordinates: [item.longitude, item.latitude]
+        latitude: parseFloat(item.latitude),
+        longitude: parseFloat(item.longitude)
       }));
-
+  
       return filteredData;
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
   };
+  
 
   const filterMuseums = () => {
     const filtered = allMuseums.filter(museum => {
@@ -187,72 +189,72 @@ function Museums() {
       </Accordion>
       <div style={{ paddingTop: '20px', paddingBottom: '20px' }}>
         <MapContainer center={[47.6, -122.3]} zoom={10} style={{ height: '400px', width: '100%' }}>
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {filteredMuseums.map((museum, index) => (
-            <CircleMarker
-              key={index}
-              center={museum.coordinates}
-              radius={5}
-              color="#4C72B0"
-              fillColor="#FFFFFF"
-              fillOpacity={1.0}
-            >
-              <Popup className="custom-popup">
-                <Box sx={{ p: 2 }}>
-                  <Typography variant="h6" gutterBottom>
-                    {museum.name}
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    {museum.address}
-                  </Typography>
-                  <Typography variant="body2">
-                    <a href={museum.url} target="_blank" rel="noopener noreferrer">
-                      {museum.url}
-                    </a>
-                  </Typography>
-                </Box>
-              </Popup>
-            </CircleMarker>
-          ))}
+            <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {filteredMuseums.map((museum, index) => (
+                <CircleMarker
+                key={index}
+                center={[museum.latitude, museum.longitude]}  // Use latitude and longitude directly here
+                radius={5}
+                color="#4C72B0"
+                fillColor="#FFFFFF"
+                fillOpacity={1.0}
+                >
+                <Popup className="custom-popup">
+                    <Box sx={{ p: 2 }}>
+                    <Typography variant="h6" gutterBottom>
+                        {museum.name}
+                    </Typography>
+                    <Typography variant="body2" gutterBottom>
+                        {museum.address}
+                    </Typography>
+                    <Typography variant="body2">
+                        <a href={museum.url} target="_blank" rel="noopener noreferrer">
+                        {museum.url}
+                        </a>
+                    </Typography>
+                    </Box>
+                </Popup>
+                </CircleMarker>
+            ))}
         </MapContainer>
       </div>
 
       <Grid container spacing={2}>
         {filteredMuseums.map((museum, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
+            <Grid item xs={12} sm={6} md={4} key={index}>
             <Card>
-              <CardContent>
+                <CardContent>
                 <Typography gutterBottom variant="h6" component="div">
-                  {museum.name}
+                    {museum.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {museum.address}
+                    {museum.address}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {museum['dominant_discipline']}
+                    {museum['dominant_discipline']}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {museum.phone}
+                    {museum.phone}
                 </Typography>
-              </CardContent>
-              <CardActions>
+                </CardContent>
+                <CardActions>
                 <Button size="small" color="primary" href={museum.url} target="_blank" rel="noopener noreferrer">
-                  Learn More
+                    Learn More
                 </Button>
                 <IconButton
-                  aria-label="add to favorites"
-                  onClick={() => handleFavoriteToggle(museum)}
+                    aria-label="add to favorites"
+                    onClick={() => handleFavoriteToggle(museum)}
                 >
-                  {favorites.includes(museum) ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
+                    {favorites.includes(museum) ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
                 </IconButton>
-              </CardActions>
+                </CardActions>
             </Card>
-          </Grid>
+         </Grid>
         ))}
-      </Grid>
+    </Grid>
     </Box>
   );
 }
