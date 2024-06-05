@@ -48,6 +48,13 @@ function Museums() {
       const data = await response.json();
       let filteredData = data.filter(item => item.name && item.name.toLowerCase().includes('museum'));
       filteredData = filteredData.filter(item => item.phone != null);
+
+      // Transform longitude and latitude keys to an array
+      filteredData = filteredData.map(item => ({
+        ...item,
+        coordinates: [item.longitude, item.latitude]
+      }));
+
       return filteredData;
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
@@ -187,7 +194,7 @@ function Museums() {
           {filteredMuseums.map((museum, index) => (
             <CircleMarker
               key={index}
-              center={[museum.latitude, museum.longitude]}
+              center={museum.coordinates}
               radius={5}
               color="#4C72B0"
               fillColor="#FFFFFF"
