@@ -5,11 +5,11 @@ export const FavoritesContext = createContext();
 export const FavoritesProvider = ({ children }) => {
     const [favorites, setFavorites] = useState([]);
 
-    const handleFavoriteToggle = (exhibition) => {
+    const handleFavoriteToggle = (item) => {
         setFavorites(prevFavorites => 
-            prevFavorites.includes(exhibition) 
-                ? prevFavorites.filter(fav => fav !== exhibition) 
-                : [...prevFavorites, exhibition]
+            prevFavorites.some(fav => fav.id === item.id)
+                ? prevFavorites.filter(fav => fav.id !== item.id)
+                : [...prevFavorites, item]
         );
     };
 

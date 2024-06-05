@@ -10,7 +10,7 @@ import { FavoritesProvider } from './FavoritesContext';
 import Home from './Home';
 import Profile from './Profile';
 import Exhibitions from './Exhibitions';
-import Museums from './Museums';
+import Museums from './Museusm2';
 import Favorites from './Favorites';
 import Layout from './Layout';
 

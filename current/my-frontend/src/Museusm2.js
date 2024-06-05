@@ -48,20 +48,20 @@ function Museums() {
       const data = await response.json();
       let filteredData = data.filter(item => item.name && item.name.toLowerCase().includes('museum'));
       filteredData = filteredData.filter(item => item.phone != null);
-  
+
       // Ensure latitude and longitude are numbers and present
       filteredData = filteredData.map(item => ({
         ...item,
+        id: item.phone,  // Ensure each item has a unique id
         latitude: parseFloat(item.latitude),
         longitude: parseFloat(item.longitude)
       }));
-  
+
       return filteredData;
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
   };
-  
 
   const filterMuseums = () => {
     const filtered = allMuseums.filter(museum => {
@@ -196,7 +196,7 @@ function Museums() {
             {filteredMuseums.map((museum, index) => (
                 <CircleMarker
                 key={index}
-                center={[museum.latitude, museum.longitude]}  // Use latitude and longitude directly here
+                center={[museum.latitude, museum.longitude]}  
                 radius={5}
                 color="#4C72B0"
                 fillColor="#FFFFFF"
@@ -248,7 +248,7 @@ function Museums() {
                     aria-label="add to favorites"
                     onClick={() => handleFavoriteToggle(museum)}
                 >
-                    {favorites.includes(museum.name) ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
+                    {favorites.some(fav => fav.id === museum.id) ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}
                 </IconButton>
                 </CardActions>
             </Card>

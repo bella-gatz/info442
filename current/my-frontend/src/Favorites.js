@@ -1,8 +1,14 @@
 import React, { useContext } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Box, Typography, Card, CardContent, CardMedia, IconButton, Grid } from '@mui/material';
+import {
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
+    Box,
+    Typography,
+    IconButton
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { FavoritesContext } from './FavoritesContext';
 
 function Favorites() {
@@ -18,7 +24,7 @@ function Favorites() {
                             aria-controls={`panel${index + 1}-content`}
                             id={`panel${index + 1}-header`}
                         >
-                            {favorite.Name || favorite.title}
+                            <Typography>{favorite.name || favorite.title || 'Unnamed'}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Box
@@ -36,14 +42,14 @@ function Favorites() {
                                         maxHeight: { xs: 233, md: 167 },
                                         maxWidth: { xs: 350, md: 250 },
                                     }}
-                                    alt={favorite.Name || favorite.title}
-                                    src={favorite.ImageURL || favorite.img_url || 'placeholder.jpg'}
+                                    alt={favorite.name || favorite.title || 'Unnamed'}
+                                    src={favorite.imageURL || favorite.img_url || 'placeholder.jpg'}
                                 />
                             </Box>
                             <Typography component="div">
-                                <p>{favorite.Address || favorite.date}</p>
-                                <p>{favorite['Dominant Discipline'] || favorite.location}</p>
-                                <p>{favorite.description}</p>
+                                <p>{favorite.address || favorite.date || 'No address available'}</p>
+                                <p>{favorite.dominant_discipline || favorite.location || 'No discipline/location available'}</p>
+                                <p>{favorite.description || 'No description available'}</p>
                                 <IconButton
                                     aria-label="remove from favorites"
                                     onClick={() => handleFavoriteToggle(favorite)}
